@@ -1,19 +1,11 @@
 def generateDocument(characters, document):
     unicodeMap = {}
-    for letter in document:
-        encodedLetter = ord(letter)
-        if encodedLetter not in unicodeMap:
-            unicodeMap[encodedLetter] = 1
-        else:
-            unicodeMap[encodedLetter] += 1
-
     for char in characters:
-        encodedChar = ord(char)
-        if encodedChar in unicodeMap:
-            unicodeMap[encodedChar] -= 1
-
-    for x in unicodeMap:
-        if unicodeMap[x] > 0:
+        if char not in unicodeMap:
+            unicodeMap[char] = 0
+        unicodeMap[char] += 1
+    for letter in document:
+        if letter not in unicodeMap or unicodeMap[letter] == 0:
             return False
-
+        unicodeMap[letter] -= 1
     return True
